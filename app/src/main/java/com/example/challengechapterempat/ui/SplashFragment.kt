@@ -22,7 +22,6 @@ class SplashFragment : Fragment() {
         binding = FragmentSplashBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-    
 
 
 }
