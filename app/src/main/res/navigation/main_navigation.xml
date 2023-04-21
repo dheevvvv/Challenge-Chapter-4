@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.challengechapterempat.ui.SplashFragment"
+        android:name="com.example.challengechapterempat.datastore_preferences.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
