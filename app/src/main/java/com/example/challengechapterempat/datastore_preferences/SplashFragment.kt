@@ -36,7 +36,7 @@ class SplashFragment : Fragment() {
             lifecycleScope.launch {
 
                 userManager.userPasswordFlow.collect { userValue ->
-                    if (userValue != null) {
+                    if (userValue.isNotEmpty()) {
                         findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                     } else {
                         findNavController().navigate(R.id.action_splashFragment_to_loginFragment)

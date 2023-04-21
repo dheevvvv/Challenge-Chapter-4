@@ -6,10 +6,10 @@ import androidx.room.*
 @Dao
 interface NoteDAO {
     @Insert
-    fun insertNote(note: NoteData)
+    suspend fun insertNote(note: NoteData)
 
     @Query("SELECT * FROM NoteData ")
-    fun getDataNote() : List<NoteData>
+    suspend fun getDataNote() : List<NoteData>
 
     @Query("SELECT * FROM NoteData ORDER BY title DESC")
     suspend fun getAllNotesDesc(): List<NoteData>
@@ -18,8 +18,8 @@ interface NoteDAO {
     suspend fun getAllNotesAsc(): List<NoteData>
 
     @Delete
-    fun deleteNote(note: NoteData)
+    suspend fun deleteNote(note: NoteData)
 
     @Update
-    fun updateNote(note: NoteData)
+    suspend fun updateNote(note: NoteData)
 }
