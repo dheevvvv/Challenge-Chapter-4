@@ -61,6 +61,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation "androidx.activity:activity-ktx:1.7.1"
 
+    //datastore preferences
+    implementation 'androidx.datastore:datastore-preferences-android:1.1.0-alpha04'
+    implementation 'androidx.datastore:datastore-android:1.1.0-alpha04'
+
     //proto datastore
     implementation  "androidx.datastore:datastore-core:1.0.0"
     implementation  "com.google.protobuf:protobuf-javalite:3.18.0"
