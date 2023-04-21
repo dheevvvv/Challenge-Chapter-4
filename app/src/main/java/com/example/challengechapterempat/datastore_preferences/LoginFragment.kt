@@ -34,6 +34,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userManager = UserManager(requireContext())
+        binding.onClick = this
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
         binding.btnLogin.setOnClickListener {

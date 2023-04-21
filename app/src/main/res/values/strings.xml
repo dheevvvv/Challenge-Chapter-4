@@ -15,4 +15,5 @@
     <string name="home">Home</string>
     <string name="filter">filter</string>
     <string name="add_note">add note</string>
+    <string name="empty_state">Data masih kosong, Silahkan menambah catatan notes</string>
 </resources>

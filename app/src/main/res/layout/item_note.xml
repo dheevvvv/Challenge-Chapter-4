@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="item"
+            type="com.example.challengechapterempat.databases_room.NoteData" />
 
     </data>
 
@@ -13,6 +16,7 @@
         android:layout_margin="15dp"
         app:cardBackgroundColor="@color/sakura"
         app:cardCornerRadius="20dp"
+        android:elevation="100dp"
         tools:ignore="TextSizeCheck">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,31 +28,34 @@
                 android:id="@+id/tv_judul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Judul"
+                android:text="@{item.title}"
+                tools:text="Title"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,TextContrastCheck" />
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Date"
+                android:text="@{item.date}"
+                tools:text="Date"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_judul"
-                tools:ignore="HardcodedText,TextContrastCheck" />
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="content"
+                android:text="@{item.content}"
+                tools:text="Content"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
