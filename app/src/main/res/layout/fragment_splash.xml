@@ -21,6 +21,7 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_gravity="center"
-        android:src="@drawable/splashnote"/>
+        android:src="@drawable/splashnote"
+        tools:ignore="ContentDescription" />
 
 </FrameLayout>
