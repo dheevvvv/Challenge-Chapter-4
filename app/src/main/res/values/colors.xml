@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="darkgrey">#97000000</color>
+    <color name="sakura">#e9b1cd</color>
+    <color name="sakura2">#c3829e</color>
 </resources>
