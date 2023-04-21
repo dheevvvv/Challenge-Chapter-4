@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [NoteData::class], version = 1)
+@Database(entities = [NoteData::class, UserData::class], version = 1)
 abstract class NoteDatabase:RoomDatabase() {
-    abstract fun noteDao() : NoteDAO
-
+    abstract fun noteDao(): NoteDAO
+    abstract fun userDao(): UserDAO
     companion object{
 
         private var INSTANCE : NoteDatabase? = null
@@ -28,4 +28,5 @@ abstract class NoteDatabase:RoomDatabase() {
             INSTANCE = null
         }
     }
+
 }
