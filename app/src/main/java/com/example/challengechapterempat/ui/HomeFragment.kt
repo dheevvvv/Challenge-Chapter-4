@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -35,17 +36,39 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         noteViewModel = ViewModelProvider(requireActivity()).get(NoteViewModel::class.java)
+        filterPreferences = FilterPreferences(requireContext())
 
-        if (filterPreferences.getString("KEY_FILTER").isNullOrEmpty()) {
+        val popupMenu = PopupMenu(requireContext(), binding.ivFilter)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menuItem_ascending -> {
+                    filterPreferences.put("filter_key", "ASCENDING")
+                    true
+                }
+                R.id.menuItem_descending-> {
+                    filterPreferences.put("filter_key", "DESCENDING")
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.ivFilter.setOnClickListener {
+            popupMenu.show()
+        }
+
+
+        if (filterPreferences.getString("filter_key").isNullOrEmpty()) {
             noteViewModel.getDataNotes()
-        } else if (filterPreferences.getString("KEY_FILTER").equals("ASCENDING", true)) {
+        } else if (filterPreferences.getString("filter_key").equals("ASCENDING", true)) {
             noteViewModel.getAllNotesAsc()
-        } else if (filterPreferences.getString("KEY_FILTER").equals("DESCENDING", true)) {
+        } else if (filterPreferences.getString("filter_key").equals("DESCENDING", true)) {
             noteViewModel.getAllNotesDesc()
         }
 
         recyclerView()
     }
+
 
     private fun recyclerView() {
         noteViewModel.listNote.observe(viewLifecycleOwner) {
