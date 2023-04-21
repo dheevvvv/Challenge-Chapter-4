@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.challengechapterempat.ui.RegisterFragment"
+        android:name="com.example.challengechapterempat.datastore_preferences.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action

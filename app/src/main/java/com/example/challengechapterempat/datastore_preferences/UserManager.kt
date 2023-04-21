@@ -10,20 +10,19 @@ import kotlinx.coroutines.flow.map
 
 
 const val PREFERENCE_NAME = "prefs"
-class UserManager(private val context: Context) {
-    private val Context.datastore by preferencesDataStore(PREFERENCE_NAME)
+class UserManager(val context: Context) {
+    val Context.datastore by preferencesDataStore(PREFERENCE_NAME)
 
-    private val USERNAME = stringPreferencesKey("username")
-    private val PASSWORD = stringPreferencesKey("password")
-    private val EMAIL = stringPreferencesKey("email")
-    private val FILTER = intPreferencesKey("filter_order")
+    val USERNAME = stringPreferencesKey("username")
+    val PASSWORD = stringPreferencesKey("password")
+    val EMAIL = stringPreferencesKey("email")
+    val FILTER = intPreferencesKey("filter_order")
 
-    suspend fun saveData(username:String, password:String, email:String, filter:Int){
+    suspend fun saveData(username:String, password:String, email:String){
         context.datastore.edit {
             it [USERNAME] = username
             it [PASSWORD] = password
             it [EMAIL] = email
-            it [FILTER] = filter
         }
     }
 
@@ -41,9 +40,6 @@ class UserManager(private val context: Context) {
     }
     val userEmailFlow:Flow<String> = context.datastore.data.map {
         it [EMAIL]?: ""
-    }
-    val userFilterFlow:Flow<Int> = context.datastore.data.map {
-        it [FILTER]?: 0
     }
 
 
