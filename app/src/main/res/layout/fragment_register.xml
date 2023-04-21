@@ -4,14 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="onClick"
+            type="com.example.challengechapterempat.datastore_preferences.RegisterFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
-        tools:context=".ui.RegisterFragment">
+        tools:context=".datastore_preferences.RegisterFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <ImageView
@@ -121,7 +123,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/outlinedTextField4"
-            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintButtonSize" />
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintButtonSize"
+            android:onClick="@{()-> onClick.register()}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
