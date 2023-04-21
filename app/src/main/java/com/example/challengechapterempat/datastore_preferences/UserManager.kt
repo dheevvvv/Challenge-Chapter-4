@@ -13,16 +13,13 @@ const val PREFERENCE_NAME = "prefs"
 class UserManager(val context: Context) {
     val Context.datastore by preferencesDataStore(PREFERENCE_NAME)
 
-    val USERNAME = stringPreferencesKey("username")
-    val PASSWORD = stringPreferencesKey("password")
     val EMAIL = stringPreferencesKey("email")
-    val FILTER = intPreferencesKey("filter_order")
+    val PASSWORD = stringPreferencesKey("password")
 
-    suspend fun saveData(username:String, password:String, email:String){
+    suspend fun saveData(email:String, password:String){
         context.datastore.edit {
-            it [USERNAME] = username
-            it [PASSWORD] = password
             it [EMAIL] = email
+            it [PASSWORD] = password
         }
     }
 
@@ -32,15 +29,11 @@ class UserManager(val context: Context) {
         }
     }
 
-    val userUsernameFlow: Flow<String> = context.datastore.data.map {
-        it [USERNAME] ?: ""
-    }
     val userPasswordFlow:Flow<String> = context.datastore.data.map {
         it [PASSWORD] ?: ""
     }
     val userEmailFlow:Flow<String> = context.datastore.data.map {
         it [EMAIL]?: ""
     }
-
 
 }

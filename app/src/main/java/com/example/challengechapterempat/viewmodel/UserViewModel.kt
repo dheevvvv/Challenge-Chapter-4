@@ -19,6 +19,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             userDAO.insertUser(user)
         }
     }
+    fun checkUser(email : String, password : String) : LiveData<UserData> = NoteDatabase.getInstance((getApplication()))!!.userDao().checkUser(email, password)
 
     fun setUsername(user: String){
         _username.value = user

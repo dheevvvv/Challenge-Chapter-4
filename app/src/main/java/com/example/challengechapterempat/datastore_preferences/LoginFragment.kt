@@ -5,15 +5,22 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databinding.FragmentLoginBinding
+import com.example.challengechapterempat.viewmodel.UserViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var userManager: UserManager
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,22 +34,38 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userManager = UserManager(requireContext())
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
-        userManager.userEmailFlow.asLiveData().observe(viewLifecycleOwner) {
-            binding.etEmailLogin.text = Editable.Factory.getInstance().newEditable(it)
+        binding.btnLogin.setOnClickListener {
+            login()
         }
-        userManager.userPasswordFlow.asLiveData().observe(viewLifecycleOwner){
-            binding.etPasswordLogin.text = Editable.Factory.getInstance().newEditable(it)
+        binding.tvRegisterLogin.setOnClickListener {
+            newRegist()
         }
 
     }
 
-    fun login(){
-
+    private fun checkUser(email: String, password: String) {
+        userViewModel.checkUser(email, password).observe(viewLifecycleOwner) {
+            if (it == null) {
+                Toast.makeText(requireContext(), "Email or password Salah", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                GlobalScope.launch {
+                    userManager.saveData(email, password)
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
+            }
+        }
     }
 
-    fun newRegist(){
-
+    fun login() {
+        val emailLogin = binding.etEmailLogin.toString()
+        val passwordLogin = binding.etPasswordLogin.toString()
+        checkUser(emailLogin,passwordLogin)
     }
 
+    fun newRegist() {
+        findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+    }
 }
