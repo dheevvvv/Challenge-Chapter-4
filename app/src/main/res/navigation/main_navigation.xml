@@ -46,6 +46,15 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailNoteFragment"
+            app:destination="@id/detailNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -55,5 +64,31 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/addNoteFragment"
+        android:name="com.example.challengechapterempat.ui.AddNoteFragment"
+        android:label="AddNoteFragment" >
+        <action
+            android:id="@+id/action_addNoteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.example.challengechapterempat.ui.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note" >
+        <action
+            android:id="@+id/action_editNoteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailNoteFragment"
+        android:name="com.example.challengechapterempat.ui.DetailNoteFragment"
+        android:label="fragment_detail_note"
+        tools:layout="@layout/fragment_detail_note" >
+        <action
+            android:id="@+id/action_detailNoteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
