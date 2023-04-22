@@ -4,13 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="onClick"
+            type="com.example.challengechapterempat.datastore_preferences.ProfileFragment" />
+        <variable
+            name="viewmodel"
+            type="com.example.challengechapterempat.viewmodel.UserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ProfileFragment"
+        tools:context=".datastore_preferences.ProfileFragment"
         android:padding="20dp">
 
         <!-- TODO: Update blank fragment layout -->
@@ -55,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="@string/username"
+                    android:text="@{()->viewmodel.setUsername()}"
                     android:textColor="@color/black"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -68,6 +73,7 @@
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/sakura"
             android:text="@string/logout"
+            android:onClick="@{()->onClick.logout()}"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

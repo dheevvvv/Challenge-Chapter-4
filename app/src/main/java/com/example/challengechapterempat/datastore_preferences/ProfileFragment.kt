@@ -1,4 +1,4 @@
-package com.example.challengechapterempat.ui
+package com.example.challengechapterempat.datastore_preferences
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databinding.FragmentProfileBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-
+    private lateinit var userManager: UserManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,6 +21,21 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        userManager = UserManager(requireContext())
+
+        binding.btnLogout.setOnClickListener {
+            logout()
+        }
+    }
+
+    fun logout(){
+        GlobalScope.launch {
+            userManager.clearData()
+        }
     }
 
 
