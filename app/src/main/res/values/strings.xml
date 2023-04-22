@@ -18,4 +18,10 @@
     <string name="empty_state">Data masih kosong, Silahkan menambah catatan notes</string>
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
+    <string name="input_data">Input Data</string>
+    <string name="masukan_judul_catatan">Masukan judul catatan</string>
+    <string name="masukan_isi_konten_catatan">Masukan isi konten catatan</string>
+    <string name="save_note">save note</string>
+    <string name="cancel">Cancel</string>
+    <string name="masukan_date_tanggal">masukan date/tanggal</string>
 </resources>

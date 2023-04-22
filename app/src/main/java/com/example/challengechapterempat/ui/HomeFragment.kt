@@ -57,6 +57,12 @@ class HomeFragment : Fragment() {
             popupMenu.show()
         }
 
+        binding.btnAddNote.setOnClickListener {
+            val dialog = AddNoteFragment()
+            dialog.show(childFragmentManager, "AddNoteDialog")
+
+        }
+
 
         if (filterPreferences.getString("filter_key").isNullOrEmpty()) {
             noteViewModel.getDataNotes()
