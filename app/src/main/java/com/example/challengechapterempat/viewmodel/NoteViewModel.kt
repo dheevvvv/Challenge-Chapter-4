@@ -29,5 +29,8 @@ class NoteViewModel(application: Application):AndroidViewModel(application) {
     fun addNote(noteData: NoteData) = viewModelScope.launch {
         NoteDatabase.getInstance((getApplication()))!!.noteDao().insertNote(noteData)
     }
+    fun editNote(noteData: NoteData) = viewModelScope.launch {
+        NoteDatabase.getInstance((getApplication()))!!.noteDao().updateNote(noteData)
+    }
 }
 

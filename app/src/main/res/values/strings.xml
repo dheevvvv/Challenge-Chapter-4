@@ -24,4 +24,8 @@
     <string name="save_note">save note</string>
     <string name="cancel">Cancel</string>
     <string name="masukan_date_tanggal">masukan date/tanggal</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="edit_judul_catatan_note">Edit judul catatan note</string>
+    <string name="edit_isi_kontent_catatan_note">Edit isi kontent catatan note</string>
+    <string name="edit_date_tanggal_catatan_note">Edit date tanggal catatan note</string>
 </resources>

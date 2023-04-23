@@ -47,8 +47,6 @@ class NoteAdapter(var listNote: List<NoteData>): RecyclerView.Adapter<NoteAdapte
             view.findNavController().navigate(R.id.action_homeFragment_to_detailNoteFragment, bundle)
         }
 
-
-
     }
 
     override fun getItemCount(): Int {
