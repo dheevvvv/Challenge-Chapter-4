@@ -33,6 +33,12 @@ class AddNoteFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         noteViewModel = ViewModelProvider(requireActivity()).get(NoteViewModel::class.java)
 
+        binding.btnCancelAdd.setOnClickListener {
+            cancelAdd()
+        }
+        binding.btnSaveAdd.setOnClickListener {
+            saveAdd()
+        }
     }
 
 
