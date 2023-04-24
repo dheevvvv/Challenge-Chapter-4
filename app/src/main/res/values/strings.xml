@@ -28,4 +28,5 @@
     <string name="edit_judul_catatan_note">Edit judul catatan note</string>
     <string name="edit_isi_kontent_catatan_note">Edit isi kontent catatan note</string>
     <string name="edit_date_tanggal_catatan_note">Edit date tanggal catatan note</string>
+    <string name="detail_note">Detail Note</string>
 </resources>
