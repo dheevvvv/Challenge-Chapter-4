@@ -5,16 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databinding.FragmentProfileBinding
+import com.example.challengechapterempat.viewmodel.UserViewModel
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var userManager: UserManager
+    private lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,9 +32,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userManager = UserManager.getInstance(requireContext())
+        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
-        val user = arguments?.getString("username")
-        binding.username =user.toString()
+        userViewModel.getUsername()
+        userViewModel.username.observe(viewLifecycleOwner){
+            binding.username = "Hello, Welcome!," + " " + it.toString()
+        }
+        binding.onClick = this
 
         binding.btnLogout.setOnClickListener {
             logout()
@@ -37,7 +46,7 @@ class ProfileFragment : Fragment() {
     }
 
     fun logout(){
-        GlobalScope.launch {
+        GlobalScope.async {
             userManager.clearData()
         }
         findNavController().navigate(R.id.action_profileFragment_to_loginFragment)

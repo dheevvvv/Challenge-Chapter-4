@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 
@@ -52,6 +53,12 @@ class UserManager(private val context: Context) {
                 preferences[IS_LOGIN_KEY] ?: false
             }
     }
+
+    suspend fun getUsername(): String {
+        val preferences = context.datastore.data.first()
+        return preferences[USERNAME] ?: ""
+    }
+
 
 
     val userPasswordFlow:Flow<String> = context.datastore.data.map {
