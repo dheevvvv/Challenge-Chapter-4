@@ -20,10 +20,11 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     val userPasswordFlow: Flow<String>
         get() = _password.asFlow()
 
-    fun insertUser(user : UserData){
+
+    fun insertUser(userData: UserData){
         GlobalScope.async {
             val userDAO = NoteDatabase.getInstance(getApplication())?.userDao()!!
-            userDAO.insertUser(user)
+            userDAO.insertUser(userData)
         }
     }
     fun checkUser(email : String, password : String) : LiveData<UserData> = NoteDatabase.getInstance((getApplication()))!!.userDao().checkUser(email, password)

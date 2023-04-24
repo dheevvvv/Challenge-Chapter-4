@@ -10,6 +10,6 @@ interface UserDAO {
     @Insert
     fun insertUser(userData: UserData)
 
-    @Query("SELECT * FROM Userdata WHERE email = :email AND password = :password")
+    @Query("SELECT * FROM table_userdata WHERE email = :email AND password = :password")
     fun checkUser(email : String, password : String): LiveData<UserData>
 }

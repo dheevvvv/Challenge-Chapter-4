@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var userManager: UserManager
     private lateinit var userViewModel: UserViewModel
 
 
@@ -35,7 +34,6 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.onClick = this
-        userManager = UserManager(requireContext())
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         binding.btnRegister.setOnClickListener {
             register()
@@ -47,15 +45,15 @@ class RegisterFragment : Fragment() {
         userViewModel.insertUser(UserData(0,username,email,password))
     }
     fun register(){
-        val username = binding.etUsernameRegist.toString()
-        val email = binding.etEmailRegist.toString()
-        val password = binding.etPasswordRegist.toString()
-        val confirmPassword = binding.etConfirmPasswordRegist.toString()
+        val username = binding.etUsernameRegist.text.toString()
+        val email = binding.etEmailRegist.text.toString()
+        val password = binding.etPasswordRegist.text.toString()
+        val confirmPassword = binding.etConfirmPasswordRegist.text.toString()
 
         if (password != confirmPassword){
             binding.etConfirmPasswordRegist.error = "Confirm password tidak sama dengan password"
             binding.etConfirmPasswordRegist.requestFocus()
-            return
+
         } else{
             saveUser(username,email,password)
             Toast.makeText(context, "Registrasi Berhasil", Toast.LENGTH_SHORT).show()

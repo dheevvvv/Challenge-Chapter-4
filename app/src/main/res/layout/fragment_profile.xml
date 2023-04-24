@@ -8,8 +8,8 @@
             name="onClick"
             type="com.example.challengechapterempat.datastore_preferences.ProfileFragment" />
         <variable
-            name="viewmodel"
-            type="com.example.challengechapterempat.viewmodel.UserViewModel" />
+            name="username"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="@{()->viewmodel.setUsername()}"
+                    android:text="@{username}"
                     android:textColor="@color/black"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

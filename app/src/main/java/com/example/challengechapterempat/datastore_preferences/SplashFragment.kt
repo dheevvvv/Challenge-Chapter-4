@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databinding.FragmentSplashBinding
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
@@ -31,19 +32,27 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userManager = UserManager(requireContext())
+        userManager = com.example.challengechapterempat.datastore_preferences.UserManager(requireContext())
         Handler().postDelayed({
             lifecycleScope.launch {
-
-                userManager.userPasswordFlow.collect { userValue ->
-                    if (userValue.isNotEmpty()) {
-                        findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-                    } else {
-                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-                    }
+                if (userManager.isLoggedIn().first()){
+                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                }else{
+                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }
             }
         },2500)
     }
+
+//    lifecycleScope.launch {
+//
+//        userManager.userPasswordFlow.collect { userValue ->
+//            if (userValue.isNotEmpty()) {
+//                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+//            } else {
+//                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+//            }
+//        }
+//    }
 
 }
