@@ -18,7 +18,7 @@ abstract class NoteDatabase:RoomDatabase() {
             if (INSTANCE == null){
                 synchronized(NoteDatabase::class){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        NoteDatabase::class.java,"Note.db").build()
+                        NoteDatabase::class.java,"Note.db").fallbackToDestructiveMigration().build()
                 }
             }
             return INSTANCE

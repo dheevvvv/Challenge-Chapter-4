@@ -1,6 +1,8 @@
 package com.example.challengechapterempat.datastore_preferences
 
+import android.annotation.SuppressLint
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -10,16 +12,31 @@ import kotlinx.coroutines.flow.map
 
 
 const val PREFERENCE_NAME = "prefs"
-class UserManager(val context: Context) {
-    val Context.datastore by preferencesDataStore(PREFERENCE_NAME)
+class UserManager(private val context: Context) {
+    private val Context.datastore by preferencesDataStore(PREFERENCE_NAME)
 
-    val EMAIL = stringPreferencesKey("email")
-    val PASSWORD = stringPreferencesKey("password")
+    private val USERNAME = stringPreferencesKey("username")
+    private val EMAIL = stringPreferencesKey("email")
+    private val PASSWORD = stringPreferencesKey("password")
+    private val IS_LOGIN_KEY = booleanPreferencesKey("is_login")
 
-    suspend fun saveData(email:String, password:String){
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        @Volatile private var instance: UserManager? = null
+
+        fun getInstance(context: Context): UserManager {
+            return instance ?: synchronized(this) {
+                instance ?: UserManager(context).also { instance = it }
+            }
+        }
+    }
+
+    suspend fun saveData(username:String, email:String, password:String, is_login_key:Boolean){
         context.datastore.edit {
+            it [USERNAME] = username
             it [EMAIL] = email
             it [PASSWORD] = password
+            it [IS_LOGIN_KEY] = is_login_key
         }
     }
 
@@ -29,11 +46,22 @@ class UserManager(val context: Context) {
         }
     }
 
+    fun isLoggedIn(): Flow<Boolean> {
+        return context.datastore.data
+            .map { preferences ->
+                preferences[IS_LOGIN_KEY] ?: false
+            }
+    }
+
+
     val userPasswordFlow:Flow<String> = context.datastore.data.map {
         it [PASSWORD] ?: ""
     }
     val userEmailFlow:Flow<String> = context.datastore.data.map {
         it [EMAIL]?: ""
     }
+
+
+
 
 }

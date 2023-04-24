@@ -27,6 +27,9 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         userManager = UserManager(requireContext())
 
+        val user = arguments?.getString("username")
+        binding.username =user.toString()
+
         binding.btnLogout.setOnClickListener {
             logout()
         }

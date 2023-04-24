@@ -8,13 +8,13 @@ interface NoteDAO {
     @Insert
     suspend fun insertNote(note: NoteData)
 
-    @Query("SELECT * FROM NoteData ")
+    @Query("SELECT * FROM table_note")
     suspend fun getDataNote() : List<NoteData>
 
-    @Query("SELECT * FROM NoteData ORDER BY title DESC")
+    @Query("SELECT * FROM table_note ORDER BY title DESC")
     suspend fun getAllNotesDesc(): List<NoteData>
 
-    @Query("SELECT * FROM NoteData ORDER BY title ASC")
+    @Query("SELECT * FROM table_note ORDER BY title ASC")
     suspend fun getAllNotesAsc(): List<NoteData>
 
     @Delete

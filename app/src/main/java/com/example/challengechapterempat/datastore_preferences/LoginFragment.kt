@@ -34,6 +34,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userManager = UserManager(requireContext())
+
         binding.onClick = this
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
@@ -53,7 +54,7 @@ class LoginFragment : Fragment() {
                     .show()
             } else {
                 GlobalScope.launch {
-                    userManager.saveData(email, password)
+                    userManager.saveData(username = it.username,email, password, is_login_key = true)
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
             }
@@ -61,8 +62,8 @@ class LoginFragment : Fragment() {
     }
 
     fun login() {
-        val emailLogin = binding.etEmailLogin.toString()
-        val passwordLogin = binding.etPasswordLogin.toString()
+        val emailLogin = binding.etEmailLogin.text.toString()
+        val passwordLogin = binding.etPasswordLogin.text.toString()
         checkUser(emailLogin,passwordLogin)
     }
 
