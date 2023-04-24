@@ -63,6 +63,10 @@ class HomeFragment : Fragment() {
 
         }
 
+        binding.btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+
 
         if (filterPreferences.getString("filter_key").isNullOrEmpty()) {
             noteViewModel.getDataNotes()
