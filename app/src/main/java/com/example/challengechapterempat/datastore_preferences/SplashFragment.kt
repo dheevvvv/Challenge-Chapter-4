@@ -32,12 +32,13 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userManager = com.example.challengechapterempat.datastore_preferences.UserManager(requireContext())
+        userManager = com.example.challengechapterempat.datastore_preferences.UserManager.getInstance(requireContext())
         Handler().postDelayed({
             lifecycleScope.launch {
                 if (userManager.isLoggedIn().first()){
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                 }else{
+                    userManager.clearData()
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }
             }

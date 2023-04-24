@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userManager = UserManager(requireContext())
+        userManager = UserManager.getInstance(requireContext())
 
         binding.onClick = this
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
@@ -55,8 +55,8 @@ class LoginFragment : Fragment() {
             } else {
                 GlobalScope.launch {
                     userManager.saveData(username = it.username,email, password, is_login_key = true)
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
     }
