@@ -6,14 +6,14 @@
     <data>
         <variable
             name="onClick"
-            type="com.example.challengechapterempat.datastore_preferences.RegisterFragment" />
+            type="com.example.challengechapterempat.ui.RegisterFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
-        tools:context=".datastore_preferences.RegisterFragment">
+        tools:context=".ui.RegisterFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <ImageView

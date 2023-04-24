@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databinding.FragmentProfileBinding
 import kotlinx.coroutines.GlobalScope
@@ -25,7 +26,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userManager = UserManager(requireContext())
+        userManager = UserManager.getInstance(requireContext())
 
         val user = arguments?.getString("username")
         binding.username =user.toString()
@@ -39,6 +40,7 @@ class ProfileFragment : Fragment() {
         GlobalScope.launch {
             userManager.clearData()
         }
+        findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
     }
 
 

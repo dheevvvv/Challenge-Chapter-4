@@ -1,6 +1,5 @@
-package com.example.challengechapterempat.datastore_preferences
+package com.example.challengechapterempat.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,6 @@ import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databases_room.UserData
 import com.example.challengechapterempat.databinding.FragmentRegisterBinding
 import com.example.challengechapterempat.viewmodel.UserViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class RegisterFragment : Fragment() {
