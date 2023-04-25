@@ -90,5 +90,8 @@
         <action
             android:id="@+id/action_detailNoteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_detailNoteFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

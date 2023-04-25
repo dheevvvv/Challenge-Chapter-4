@@ -16,6 +16,12 @@ class FilterPreferences(context: Context) {
         editor.putString(key, value).apply()
     }
 
+    fun clear(){
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+    }
+
     fun getString(key: String): String? {
         return sharedPreferences.getString(key, null)
     }
