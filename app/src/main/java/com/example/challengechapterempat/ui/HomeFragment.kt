@@ -1,11 +1,13 @@
 package com.example.challengechapterempat.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -80,11 +82,13 @@ class HomeFragment : Fragment(), NoteAdapter.ItemClickListener {
             when (menuItem.itemId) {
                 R.id.menuItem_ascending -> {
                     filterPreferences.put("filter_key", "ASCENDING")
+                    Toast.makeText(requireContext(), "Berhasil mengurutkan note dalam ASCENDING", Toast.LENGTH_SHORT).show()
                     noteViewModel.getAllNotesAsc()
                     true
                 }
                 R.id.menuItem_descending-> {
                     filterPreferences.put("filter_key", "DESCENDING")
+                    Toast.makeText(requireContext(), "Berhasil mengurutkan note dalam DESCENDING", Toast.LENGTH_SHORT).show()
                     noteViewModel.getAllNotesDesc()
                     true
                 }
@@ -131,7 +135,21 @@ class HomeFragment : Fragment(), NoteAdapter.ItemClickListener {
     }
 
     override fun delete(noteData: NoteData) {
-        TODO("Not yet implemented")
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.apply {
+            setTitle("Konfirmasi")
+            setMessage("Apakah Yakin ingin menghapus note : ${noteData.title} ?")
+            setNegativeButton("Batal"){dialogInterface, i->
+                dialogInterface.dismiss()
+            }
+            setPositiveButton("Hapus"){dialogInterface, i->
+                noteViewModel.deleteNote(noteData)
+                dialogInterface.dismiss()
+                Toast.makeText(requireContext(), "Berhasil menghapus note ${noteData.title}", Toast.LENGTH_SHORT).show()
+                noteViewModel.getDataNotes()
+            }
+        }
+        alertDialog.show()
     }
 
 

@@ -60,6 +60,7 @@ class AddNoteFragment : DialogFragment() {
         noteViewModel.addNote(NoteData(0,judul,content,date))
         Toast.makeText(requireContext(), "save note berhasil", Toast.LENGTH_SHORT).show()
         dismiss()
+        noteViewModel.getDataNotes()
     }
 
     fun cancelAdd(){

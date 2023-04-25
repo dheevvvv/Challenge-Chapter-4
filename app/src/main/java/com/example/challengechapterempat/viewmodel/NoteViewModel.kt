@@ -33,5 +33,8 @@ class NoteViewModel(application: Application):AndroidViewModel(application) {
     fun editNote(noteData: NoteData) = viewModelScope.launch {
         NoteDatabase.getInstance((getApplication()))!!.noteDao().updateNote(noteData)
     }
+    fun deleteNote(noteData: NoteData) = viewModelScope.launch {
+        NoteDatabase.getInstance((getApplication()))!!.noteDao().deleteNote(noteData)
+    }
 }
 
