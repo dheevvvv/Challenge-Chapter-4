@@ -6,24 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.adapter.NoteAdapter
+import com.example.challengechapterempat.databases_room.NoteData
 import com.example.challengechapterempat.databinding.FragmentHomeBinding
 import com.example.challengechapterempat.shared_preferences.FilterPreferences
 import com.example.challengechapterempat.viewmodel.NoteViewModel
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NoteAdapter.ItemClickListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var filterPreferences: FilterPreferences
     private lateinit var noteAdapter: NoteAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +66,9 @@ class HomeFragment : Fragment() {
         binding.btnProfile.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
+        noteViewModel = ViewModelProvider(requireActivity()).get(NoteViewModel::class.java)
 
+        recyclerView()
 
         if (filterPreferences.getString("filter_key").isNullOrEmpty()) {
             noteViewModel.getDataNotes()
@@ -75,8 +77,6 @@ class HomeFragment : Fragment() {
         } else if (filterPreferences.getString("filter_key").equals("DESCENDING", true)) {
             noteViewModel.getAllNotesDesc()
         }
-
-        recyclerView()
     }
 
 
@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
                     tvEmpty.isVisible = false
                     rvNote.isVisible = true
                     rvNote.setHasFixedSize(true)
-                    rvNote.adapter = NoteAdapter(ArrayList())
+                    rvNote.adapter = NoteAdapter(it, this@HomeFragment)
                     rvNote.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 }
             } else {
@@ -98,6 +98,14 @@ class HomeFragment : Fragment() {
             }
         }
 
+    }
+    override fun edit(noteData: NoteData) {
+        val dialog = EditNoteFragment.newInstance(noteData)
+        dialog.show(childFragmentManager, "EditNoteDialog")
+    }
+
+    override fun delete(noteData: NoteData) {
+        TODO("Not yet implemented")
     }
 
 

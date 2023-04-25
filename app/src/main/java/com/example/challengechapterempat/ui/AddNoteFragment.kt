@@ -29,9 +29,20 @@ class AddNoteFragment : DialogFragment() {
         return binding.root
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.fragment_add_note)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        return dialog
+    }
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         noteViewModel = ViewModelProvider(requireActivity()).get(NoteViewModel::class.java)
+
+        binding.onClick = this
 
         binding.btnCancelAdd.setOnClickListener {
             cancelAdd()
