@@ -13,7 +13,6 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_click"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="15dp"
@@ -33,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.title}"
                 tools:text="Title"
+                android:onClick="@{()->itemonClick.detail(item)}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@{item.date}"
+                android:onClick="@{()->itemonClick.detail(item)}"
                 tools:text="Date"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -58,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@{item.content}"
+                android:onClick="@{()->itemonClick.detail(item)}"
                 tools:text="Content"
                 android:textColor="@color/white"
                 android:textSize="15sp"

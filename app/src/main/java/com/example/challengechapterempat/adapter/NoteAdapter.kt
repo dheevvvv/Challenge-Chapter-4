@@ -29,6 +29,7 @@ class NoteAdapter(private var listNote: List<NoteData>, private val itemClickLis
 
     interface ItemClickListener {
         fun edit(noteData: NoteData)
+        fun detail(noteData: NoteData)
         fun delete(noteData: NoteData)
     }
 

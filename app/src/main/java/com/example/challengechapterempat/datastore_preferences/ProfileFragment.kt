@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databinding.FragmentProfileBinding
+import com.example.challengechapterempat.shared_preferences.FilterPreferences
 import com.example.challengechapterempat.viewmodel.UserViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -20,6 +21,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var userManager: UserManager
     private lateinit var userViewModel: UserViewModel
+    private lateinit var filterPreferences: FilterPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +35,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         userManager = UserManager.getInstance(requireContext())
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-
+        filterPreferences = FilterPreferences(requireContext())
         userViewModel.getUsername()
         userViewModel.username.observe(viewLifecycleOwner){
             binding.username = "Hello, Welcome!," + " " + it.toString()
@@ -49,6 +51,7 @@ class ProfileFragment : Fragment() {
         GlobalScope.async {
             userManager.clearData()
         }
+        filterPreferences.clear()
         findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
     }
 
