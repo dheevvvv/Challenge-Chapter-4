@@ -14,6 +14,7 @@ class NoteViewModel(application: Application):AndroidViewModel(application) {
     private var _listNote : MutableLiveData<List<NoteData>> = MutableLiveData()
     val listNote: LiveData<List<NoteData>> get() = _listNote
 
+
     fun getAllNotesDesc() = viewModelScope.launch {
         _listNote.postValue(NoteDatabase.getInstance((getApplication()))!!.noteDao().getAllNotesDesc())
     }

@@ -7,6 +7,9 @@
         <variable
             name="item"
             type="com.example.challengechapterempat.databases_room.NoteData" />
+        <variable
+            name="itemonClick"
+            type="com.example.challengechapterempat.adapter.NoteAdapter.ItemClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -66,6 +69,7 @@
                 android:id="@+id/iv_delete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:onClick="@{()->itemonClick.delete(item)}"
                 android:src="@drawable/ic_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +80,7 @@
                 android:id="@+id/iv_edit"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:onClick="@{()->itemonClick.edit(item)}"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_delete"

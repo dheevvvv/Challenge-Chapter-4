@@ -1,24 +1,36 @@
 package com.example.challengechapterempat.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challengechapterempat.R
 import com.example.challengechapterempat.databases_room.NoteData
 import com.example.challengechapterempat.databases_room.NoteDatabase
 import com.example.challengechapterempat.databinding.ItemNoteBinding
 import com.example.challengechapterempat.ui.HomeFragment
-import com.example.challengechapterempat.ui.HomeFragmentDirections
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import java.util.ArrayList
 
-class NoteAdapter(var listNote: List<NoteData>): RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
-    var DBNote : NoteDatabase? = null
+class NoteAdapter(private var listNote: List<NoteData>, private val itemClickListener:ItemClickListener): RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
-    class ViewHolder(var binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(var binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(noteData: NoteData){
+            binding.apply {
+                item = noteData
+                itemonClick = itemClickListener
+            }
+        }
+    }
+
+    interface ItemClickListener {
+        fun edit(noteData: NoteData)
+        fun delete(noteData: NoteData)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteAdapter.ViewHolder {
         val view = ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,27 +38,7 @@ class NoteAdapter(var listNote: List<NoteData>): RecyclerView.Adapter<NoteAdapte
     }
 
     override fun onBindViewHolder(holder: NoteAdapter.ViewHolder, position: Int) {
-        holder.binding.tvJudul.text = listNote[position].title.toString()
-        holder.binding.tvDate.text = listNote[position].date
-        holder.binding.tvContent.text = listNote[position].content
-        holder.binding.ivDelete.setOnClickListener {
-            DBNote = NoteDatabase.getInstance(it.context)
-
-            GlobalScope.async {
-                DBNote?.noteDao()?.deleteNote(listNote[position])
-            }
-        }
-
-        holder.binding.ivEdit.setOnClickListener { view ->
-            val bundle = bundleOf("dataedit" to listNote[position])
-            view.findNavController().navigate(R.id.action_homeFragment_to_editNoteFragment, bundle)
-        }
-
-        holder.binding.itemClick.setOnClickListener { view ->
-            val bundle = bundleOf("detail" to listNote[position])
-            view.findNavController().navigate(R.id.action_homeFragment_to_detailNoteFragment, bundle)
-        }
-
+        holder.bind(listNote[position])
     }
 
     override fun getItemCount(): Int {
